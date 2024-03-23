@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import { BallTriangle } from 'react-loader-spinner'
+import { useLocation } from 'react-router-dom'
 
 //const BASE_URL = import.meta.env.VITE_APIURL
 const Quizpage = () => {
@@ -9,6 +10,7 @@ const Quizpage = () => {
     const [userAnswers, setUserAnswers] = useState({})
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(false)
+    const location = useLocation()
 
     useEffect(()=>{
         const FetchData = async () =>{
@@ -30,8 +32,11 @@ const Quizpage = () => {
                 setIsLoading(false)
             }
         }
-        return () => FetchData()
-    },[])
+        if (location.state?.fetchData) {
+            return () => FetchData()
+            //FetchData();
+        }
+    },[location.state])
     if (isLoading) {
         return (<div className='w-screen
         flex items-center justify-center h-full'>

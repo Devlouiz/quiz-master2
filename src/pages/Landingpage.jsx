@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Quizpage from './Quizpage'
+import { useNavigate } from 'react-router-dom'
 const Landingpage = () => {
+  const navigate = useNavigate();
+  const handleStartQuiz = () => {
+    // Navigate to QuizPage and pass state
+    navigate('/Quizpage', { state: { fetchData: true } });
+  };
   return (
     /*<div className='flex flex-col place-items-center h-full 
     w-full justify-center gap-10  absolute inset-0
@@ -14,7 +20,9 @@ const Landingpage = () => {
     bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]
     flex flex-col place-items-center justify-center gap-10 text-center">
         <h2 className='font-sans font-semibold text-3xl'>Generate Your Questions for today</h2>
-        <Link to="/Quizpage" className='p-5 border-black'>Quizpage</Link>
+        <button style={{border:'1px solid black'}} onClick={handleStartQuiz}>
+          Quizpage
+        </button>
     </div>
   )
 }
